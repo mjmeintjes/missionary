@@ -2,10 +2,19 @@
  {org.reactivestreams/reactive-streams {:mvn/version "1.0.4"}
   cloroutine/cloroutine {:mvn/version "13"}}
 
+ :deps/prep-lib {:alias :build
+                 :fn compile
+                 :ensure "target/classes"}
+
  :paths ["src" "target/classes"]
 
  :aliases
- {:tck
+ {:build
+  {:extra-paths ["dev"]
+   :extra-deps {io.github.clojure/tools.build {:mvn/version "0.10.7"}}
+   :ns-default  tasks.build}
+
+  :tck
   {:extra-deps {org.reactivestreams/reactive-streams-tck {:mvn/version "1.0.4"}}}
 
   :clj-test
