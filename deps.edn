@@ -5,7 +5,15 @@
  :paths ["src" "target/classes"]
 
  :aliases
- {:tck
+ {;; Rebuild the committed target/classes: clj -X:build compile
+  ;; Classes are checked in (no :deps/prep-lib) so this works as a
+  ;; plain git dep, e.g. for clj-nix, without a prep step.
+  :build
+  {:extra-paths ["dev"]
+   :extra-deps {io.github.clojure/tools.build {:mvn/version "0.10.7"}}
+   :ns-default  tasks.build}
+
+  :tck
   {:extra-deps {org.reactivestreams/reactive-streams-tck {:mvn/version "1.0.4"}}}
 
   :clj-test
